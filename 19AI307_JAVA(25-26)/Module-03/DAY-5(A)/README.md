@@ -1,144 +1,60 @@
-# Ex.No:5(E) MULTITHREADING - SYNCHRONIZATION
+# Ex.No:3(E) INNER CLASS
 
 ## QUESTION:
-Write a Java program to demonstrate **multithreading with synchronization** using `wait()` and `notify()`.
+Write a Java program to create an inner class and access it from the outer class.
 
 
 ## AIM:
-To write a Java program to demonstrate **thread synchronization** using `synchronized`, `wait()`, and `notify()` methods.
-
+To write a Java program that demonstrates the use of an Inner Class and how it can be accessed from the Outer Class
 
 ## ALGORITHM :
-1. Start the program.  
-2. Import the necessary package `java.util`.  
-3. Create a class `Printer`.  
-4. Declare a boolean variable `helloTurn` to control execution.  
-5. Create a synchronized method `printHello()`:
-   - Wait if it is not hello’s turn.  
-   - Print "Hello".  
-   - Change turn and notify the other thread.  
-6. Create another synchronized method `printWorld()`:
-   - Wait if it is not world’s turn.  
-   - Print "World".  
-   - Change turn and notify the other thread.  
-7. Create a class `HelloThread` extending `Thread`.  
-8. Override `run()` to call `printHello()` `n` times.  
-9. Create a class `WorldThread` extending `Thread`.  
-10. Override `run()` to call `printWorld()` `n` times.  
-11. In the main class, read integer `n` from the user.  
-12. Create a `Printer` object.  
-13. Create two threads (`HelloThread` and `WorldThread`).  
-14. Start both threads.  
-15. Stop the program.
-
----
+1.	Start the program.
+2.	Import the necessary package 'java.util'
+3.	Create an outer class.
+4. Inside the outer class, declare and define an inner class.
+5. Create an object of the outer class.
+6. Using the outer class object, create an object of the inner class.
+7. Call a method of the inner class through its object.
+8. Display the output.
+9. Stop the program.
 
 ## PROGRAM:
-
-```java
+ ```
 /*
-Program to implement Multithreading Synchronization using Java
+Program to implement a InnerClass using Java
 Developed by: N.NAVYA SREE
-RegisterNumber: 212223040138
+RegisterNumber:212223040138
 */
-
-import java.util.*;
-
-class Printer {
-    private boolean helloTurn = true;
-
-    public synchronized void printHello() {
-        try {
-            while (!helloTurn)
-                wait();
-
-            System.out.println("Hello");
-            helloTurn = false;
-            notify();
-        } catch (Exception e) {}
-    }
-
-    public synchronized void printWorld() {
-        try {
-            while (helloTurn)
-                wait();
-
-            System.out.println("World");
-            helloTurn = true;
-            notify();
-        } catch (Exception e) {}
-    }
-}
-
-class HelloThread extends Thread {
-    Printer p;
-    int n;
-
-    HelloThread(Printer p, int n) {
-        this.p = p;
-        this.n = n;
-    }
-
-    public void run() {
-        for (int i = 0; i < n; i++)
-            p.printHello();
-    }
-}
-
-class WorldThread extends Thread {
-    Printer p;
-    int n;
-
-    WorldThread(Printer p, int n) {
-        this.p = p;
-        this.n = n;
-    }
-
-    public void run() {
-        for (int i = 0; i < n; i++)
-            p.printWorld();
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-
-        Printer p = new Printer();
-
-        Thread t1 = new HelloThread(p, n);
-        Thread t2 = new WorldThread(p, n);
-
-        t1.start();
-        t2.start();
-    }
-}
 ```
-
 
 ## SOURCE CODE:
-
-Compile the program using
-
 ```
-javac Main.java
+import java.util.Scanner;
+
+public class OuterClass 
+{
+    class InnerClass
+    {
+        void displayMessage(String name)
+        {
+            System.out.println("Hello, " + name + "! This message is from the Inner Class.");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        OuterClass outer = new OuterClass();          
+        OuterClass.InnerClass inner = outer.new InnerClass(); 
+        inner.displayMessage(name); 
+    }
+}
 ```
-
-Run the program using
-
-```
-java Main
-```
-
-
 ## OUTPUT:
 
-<img width="200" height="600" alt="image" src="https://github.com/user-attachments/assets/cc2834aa-43bb-45ce-99f3-2966b164c933" />
-
-
+![java35](https://github.com/ABINAYA-27-76/19AI307_ODD-25-26-/blob/056a3e4c1367cee76213b9fd31b087383b53c8b0/19AI307_JAVA(25-26)/Module-03/DAY-5(A)/java35.png)
 
 ## RESULT:
+Thus, the Java program to implement an Inner Class and access it from the Outer Class was successfully executed.
 
-Thus, the Java program to demonstrate **multithreading with synchronization using wait() and notify()** was executed successfully and the output was verified.
+
